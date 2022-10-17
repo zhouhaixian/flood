@@ -1,0 +1,46 @@
+{
+  "name": "flood",
+  "version": "1.4.0",
+  "description": "短信之洪水",
+  "main": "src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production ts-node .",
+    "dev": "node-dev scripts/debug.ts --clear --respawn --notify=false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhouhaixian/flood.git"
+  },
+  "keywords": [
+    "SMS"
+  ],
+  "author": "Zhou Haixian",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/zhouhaixian/flood/issues"
+  },
+  "homepage": "https://github.com/zhouhaixian/flood#readme",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/gm": "^1.18.12",
+    "@types/node": "^18.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "node-dev": "^7.4.3",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "axios": "^1.1.3",
+    "gm": "^1.25.0",
+    "log4js": "^6.7.0",
+    "tesseract.js": "^3.0.3"
+  }
+}
