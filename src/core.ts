@@ -24,7 +24,11 @@ export class Core {
     url: string | URL,
     options?: OptionsOfTextResponseBody | undefined,
   ): CancelableRequest<Response<any>> {
-    const client = got.get(url, { ...options, cookieJar: this.cookies });
+    const client = got.get(url, {
+      ...options,
+      ...this.headers,
+      cookieJar: this.cookies,
+    });
 
     client.then((data) => {
       if (Array.isArray(data.headers['set-cookie']))
@@ -40,7 +44,11 @@ export class Core {
     url: string | URL,
     options?: OptionsOfTextResponseBody | undefined,
   ): CancelableRequest<Response<any>> {
-    const client = got.post(url, { ...options, cookieJar: this.cookies });
+    const client = got.post(url, {
+      ...options,
+      ...this.headers,
+      cookieJar: this.cookies,
+    });
 
     client.then((data) => {
       if (Array.isArray(data.headers['set-cookie']))
@@ -55,13 +63,15 @@ export class Core {
   public verify(
     url: string,
     options?: OptionsOfTextResponseBody | undefined,
+    thresholdValue?: number,
   ): Promise<string> {
     return new Promise((resolve) => {
       const timestamp = new Date().getTime().toString();
       const client = got.get(url, {
         ...options,
+        ...this.headers,
         cookieJar: this.cookies,
-        searchParams: { timestamp, dt: timestamp, id: timestamp },
+        searchParams: { timestamp, dt: timestamp, id: timestamp, t: timestamp },
       });
 
       client.then((data) => {
@@ -75,7 +85,7 @@ export class Core {
       client
         .buffer()
         .then((data) => {
-          return recognize(data);
+          return recognize(data, thresholdValue);
         })
         .then((data) => {
           resolve(data);

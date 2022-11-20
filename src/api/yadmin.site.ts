@@ -1,18 +1,18 @@
-// https://user.todesk.com/
+// http://yadmin.site/user/passport/
 import { Core } from '../core';
 
 export default async function (target: string) {
   const core = new Core();
 
   const data = (await core
-    .post('https://wechat.todesk.com/api/phone/phonecode', {
+    .post('http://yadmin.site/user/passport/sms_send', {
       form: { phone: target },
     })
     .json()) as any;
 
-  if (data.code === 200) {
+  if (data.msg === '已发送') {
     return data;
   } else {
-    throw new core.APIError(data.code, data);
+    throw new core.APIError(data.msg, data);
   }
 }

@@ -1,3 +1,4 @@
+// http://yhfw.mwr.gov.cn:8050/tacs-uc/naturalMan/register
 import NodeRSA from 'node-rsa';
 import { Core } from '../core';
 

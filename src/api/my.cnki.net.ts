@@ -1,3 +1,4 @@
+// https://my.cnki.net/Register/CommonRegister.aspx?returnUrl=https://www.cnki.net
 import { Core } from '../core';
 
 export default async function (target: string) {

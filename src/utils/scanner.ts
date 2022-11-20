@@ -19,9 +19,9 @@ function deNoise(image: Buffer, thresholdValue: number): Promise<Buffer> {
   });
 }
 
-async function recognize(image: Buffer) {
+async function recognize(image: Buffer, thresholdValue = 40) {
   return (
-    await Tesseract.recognize(await deNoise(image, 40), 'eng')
+    await Tesseract.recognize(await deNoise(image, thresholdValue), 'eng')
   ).data.text.replace(/\W/g, '');
 }
 

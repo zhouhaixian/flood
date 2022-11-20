@@ -1,3 +1,4 @@
+// https://iam-sso.ndrc.gov.cn:8443/userregist/regist/touser
 import { Core } from '../core';
 
 export default async function (target: string) {

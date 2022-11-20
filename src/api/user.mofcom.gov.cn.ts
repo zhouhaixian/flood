@@ -1,3 +1,4 @@
+// https://user.mofcom.gov.cn/registration?siteId=yhdl
 import { Core } from '../core';
 export default async function (target: string) {
   const core = new Core();

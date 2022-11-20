@@ -1,4 +1,5 @@
-import { Core } from "../core";
+// http://touch.shio.gov.cn/usercenter/register.aspx
+import { Core } from '../core';
 
 export default async function (target: string) {
   const core = new Core();
