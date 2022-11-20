@@ -6,3 +6,5 @@ export type API = {
   name: string;
   default: (target: string, logger: log4js.Logger) => Promise<any>;
 };
+
+export type Blacklist = string[];

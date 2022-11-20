@@ -1,9 +1,18 @@
-import { CaptchaError } from '../src/captcha-error';
-import log4js from '../src/logger';
-import { wait } from '../src/wait';
+import { CaptchaError } from '../src/errors';
+import log4js from 'log4js';
+import { wait } from '../src/utils/wait';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 (async function debug() {
+  log4js.configure({
+    appenders: {
+      out: { type: 'stdout' },
+    },
+    categories: {
+      default: { appenders: ['out'], level: 'debug' },
+    },
+  });
+
   const name = process.argv[2];
   const logger = log4js.getLogger(name);
   const api = await import(`../src/api/${name}`);
@@ -19,7 +28,8 @@ import { wait } from '../src/wait';
       logger.error(
         `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
           e.message
-        }, 响应: ${JSON.stringify(e.response ?? {})}`,
+        }, 响应: ${JSON.stringify(e.response ?? {})}
+        堆栈: ${e.stack}`,
       );
     }
   })();
