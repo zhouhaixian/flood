@@ -4,10 +4,13 @@ import path from 'path';
 const url = process.argv[2];
 const fileName = process.argv[3];
 const isWithCaptcha = process.argv[4] === '-captcha';
+if (fileName === undefined || url === undefined) throw Error('文件名不能为空!');
 fs.writeFile(
   path.resolve(__dirname, `../src/api/${fileName}.ts`),
   isWithCaptcha ? getBaseWithCaptcha() : getBase(),
-);
+).catch((reason) => {
+  throw Error(reason);
+});
 
 function getBase() {
   return `// ${url}
