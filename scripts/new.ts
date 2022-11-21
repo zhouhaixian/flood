@@ -20,15 +20,15 @@ export default async function (target: string) {
   const core = new Core();
 
   const data = (await core
-    .post(TODO, {
+    .post('TODO', {
       TODO,
     })
     .json()) as any;
 
   if (TODO) {
-    return TODO;
+    return data;
   } else {
-    throw new core.APIError(TODO, TODO);
+    throw new core.APIError(TODO, data);
   }
 }
 `;
@@ -41,21 +41,21 @@ import { Core } from '../core';
 export default async function (target: string) {
   const core = new Core();
   const captcha = await core.verify(
-    TODO,
+    'TODO',
   );
 
   const data = (await core
-    .post(TODO, {
+    .post('TODO', {
       TODO,
     })
     .json()) as any;
 
   if (TODO) {
-    return TODO;
+    return data;
   } else if (TODO) {
-    throw new core.CaptchaError(TODO, TODO);
+    throw new core.CaptchaError(TODO, data);
   } else {
-    throw new core.APIError(TODO, TODO);
+    throw new core.APIError(TODO, data);
   }
 }
 `;
