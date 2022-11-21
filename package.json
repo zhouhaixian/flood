@@ -5,7 +5,9 @@
   "main": "src/main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ."
+    "start": "ts-node .",
+    "new": "ts-node scripts/new",
+    "delete": "ts-node scripts/delete"
   },
   "repository": {
     "type": "git",
