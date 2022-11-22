@@ -27,7 +27,7 @@ import { wait } from '../src/utils/wait';
       logger.error(
         `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
           e.message
-        }, 响应: ${JSON.stringify(e.response ?? {})}
+        }, 响应: ${JSON.stringify(e.response.body ?? {})}
         堆栈: ${e.stack}`,
       );
     }
