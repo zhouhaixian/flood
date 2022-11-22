@@ -71,7 +71,13 @@ export class Core {
         ...options,
         ...this.headers,
         cookieJar: this.cookies,
-        searchParams: { timestamp, dt: timestamp, id: timestamp, t: timestamp },
+        searchParams: {
+          timestamp,
+          dt: timestamp,
+          id: timestamp,
+          t: timestamp,
+          time: timestamp,
+        },
       });
 
       client.then((data) => {

@@ -47,7 +47,7 @@ import { wait } from './utils/wait';
 
   for (const target of targets) {
     apiScheduler(target);
-    await wait(30000);
+    await wait(61000);
   }
 
   async function apiScheduler(target: string) {
@@ -65,11 +65,11 @@ import { wait } from './utils/wait';
             logger.error(
               `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
                 e.message
-              }, 响应: ${JSON.stringify(e.response ?? {})}`,
+              }, 响应: ${JSON.stringify(e.response.body ?? {})}`,
             );
           }
         })();
-        await wait(180000);
+        await wait(120000);
       }
     }
   }

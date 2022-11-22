@@ -7,12 +7,12 @@ const isWithCaptcha = process.argv[4] === '-captcha';
 if (fileName === undefined || url === undefined) throw Error('文件名不能为空!');
 fs.writeFile(
   path.resolve(__dirname, `../src/api/${fileName}.ts`),
-  isWithCaptcha ? getBaseWithCaptcha() : getBase(),
+  isWithCaptcha ? getTemplateOfCaptcha() : getTemplate(),
 ).catch((reason) => {
   throw Error(reason);
 });
 
-function getBase() {
+function getTemplate() {
   return `// ${url}
 import { Core } from '../core';
 
@@ -34,7 +34,7 @@ export default async function (target: string) {
 `;
 }
 
-function getBaseWithCaptcha() {
+function getTemplateOfCaptcha() {
   return `// ${url}
 import { Core } from '../core';
 
