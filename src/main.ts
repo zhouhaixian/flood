@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
+import { RequestError } from 'got';
 import log4js from 'log4js';
 import path from 'path';
-import { CaptchaError } from './errors';
+import { CaptchaError, APIError } from './errors';
 import { API, Blacklist, Targets } from './types';
 import { wait } from './utils/wait';
 
@@ -62,11 +63,23 @@ import { wait } from './utils/wait';
             if (e instanceof CaptchaError) {
               wait(5000).then(launch);
             }
-            logger.error(
-              `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
-                e.message
-              }, 响应: ${JSON.stringify(e.response.body ?? {})}`,
-            );
+            if (e instanceof APIError) {
+              logger.error(
+                `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
+                  e.message
+                }, 响应: ${JSON.stringify(e.response ?? {})}`,
+              );
+            } else if (e instanceof RequestError) {
+              logger.error(
+                `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
+                  e.message
+                }, 响应: ${JSON.stringify(e.response?.body ?? {})}`,
+              );
+            } else {
+              logger.error(
+                `目标：${target}, 错误类型: ${e.name}, 错误信息: ${e.message}`,
+              );
+            }
           }
         })();
         await wait(120000);
