@@ -18,6 +18,6 @@ export default async function (target: string) {
   if (data === '发送成功') {
     return data;
   } else {
-    throw new core.APIError(data, data as any);
+    throw new core.APIError(data, data);
   }
 }
