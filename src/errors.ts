@@ -1,13 +1,11 @@
-import type { Response } from 'got';
-
 export class APIError extends Error {
-  constructor(message: string, response: Response<any>) {
+  constructor(message: string, response: any) {
     super(message);
     this.name = 'APIError';
     this.response = response;
   }
 
-  public response: Response;
+  public response: any;
 
   public toString() {
     return `${this.message}
@@ -16,13 +14,13 @@ export class APIError extends Error {
 }
 
 export class CaptchaError extends APIError {
-  constructor(message: string, response: Response) {
+  constructor(message: string, response: any) {
     super(message, response);
     this.name = 'CaptchaError';
     this.response = response;
   }
 
-  public response: Response;
+  public response: any;
 
   public toString() {
     return `${this.message}

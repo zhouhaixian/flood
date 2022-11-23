@@ -1,6 +1,7 @@
-import { CaptchaError } from '../src/errors';
+import { APIError, CaptchaError } from '../src/errors';
 import log4js from 'log4js';
 import { wait } from '../src/utils/wait';
+import { RequestError } from 'got';
 
 (async function debug() {
   log4js.configure({
@@ -24,12 +25,23 @@ import { wait } from '../src/utils/wait';
       if (e instanceof CaptchaError) {
         wait(5000).then(launch);
       }
-      logger.error(
-        `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
-          e.message
-        }, 响应: ${JSON.stringify(e.response.body ?? {})}
-        堆栈: ${e.stack}`,
-      );
+      if (e instanceof APIError) {
+        logger.error(
+          `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
+            e.message
+          }, 响应: ${JSON.stringify(e.response ?? {})}`,
+        );
+      } else if (e instanceof RequestError) {
+        logger.error(
+          `目标：${target}, 错误类型: ${e.name}, 错误信息: ${
+            e.message
+          }, 响应: ${JSON.stringify(e.response?.body ?? {})}`,
+        );
+      } else {
+        logger.error(
+          `目标：${target}, 错误类型: ${e.name}, 错误信息: ${e.message}`,
+        );
+      }
     }
   })();
 })();
