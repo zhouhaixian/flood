@@ -3,11 +3,21 @@
   "version": "1.6.6",
   "description": "短信之洪水",
   "main": "src/main.ts",
+  "bin": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node .",
     "new": "ts-node scripts/new",
-    "delete": "ts-node scripts/delete"
+    "delete": "ts-node scripts/delete",
+    "build": "rimraf dist && tsc && pkg -C GZip ."
+  },
+  "pkg": {
+    "scripts": "dist/api/**/*.js",
+    "assets": "configs/**/*",
+    "targets": [
+      "latest-win-x64"
+    ],
+    "outputPath": "dist/bin"
   },
   "repository": {
     "type": "git",
@@ -33,7 +43,9 @@
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "pkg": "^5.8.0",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.4"
