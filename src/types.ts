@@ -1,4 +1,4 @@
-import log4js from './logger';
+import log4js from 'log4js';
 
 export type Targets = string[];
 
