@@ -37,7 +37,7 @@ import { wait } from './utils/wait';
   const files = await fs.readdir(path.resolve(__dirname, './api'));
   const apis = [] as API[];
   for (const file of files) {
-    const name = file.toString().replace('.ts', '');
+    const name = file.toString().replace('.ts', '').replace('.js', '');
     if (blacklist.includes(name)) continue;
 
     apis.push({
