@@ -1,6 +1,6 @@
 {
   "name": "flood",
-  "version": "1.6.20",
+  "version": "1.6.21",
   "description": "短信之洪水",
   "main": "src/main.ts",
   "bin": "dist/main.js",
