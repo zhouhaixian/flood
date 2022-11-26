@@ -9,7 +9,7 @@
     "start": "ts-node .",
     "new": "ts-node scripts/new",
     "delete": "ts-node scripts/delete",
-    "build": "rimraf dist && tsc && pkg -C GZip ."
+    "build": "rimraf dist && tsc && pkg -C Brotli ."
   },
   "pkg": {
     "scripts": "dist/api/**/*.js",
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "gm": "^1.25.0",
-    "got": "11",
+    "got": "~11",
     "log4js": "^6.7.0",
     "node-rsa": "^1.1.1",
     "tesseract.js": "^3.0.3",
