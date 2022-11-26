@@ -19,3 +19,7 @@ sudo apt-get install tesseract-ocr
 ImageMagick: [安装包](https://imagemagick.org/script/download.php#:~:text=an%20iOS%20application.-,Windows%20Binary%20Release,-ImageMagick%20runs%20on)
 
 Tesseract-OCR: [安装包](https://github.com/UB-Mannheim/tesseract/wiki#tesseract-installer-for-windows)
+
+## 构建可执行文件
+
+**由于用于识别验证码的依赖库 `gm` 和 `tesseract.js` 依赖于上述环境依赖，故构建出来的可执行文件无法识别验证码**

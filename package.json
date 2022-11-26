@@ -1,6 +1,6 @@
 {
   "name": "flood",
-  "version": "1.6.23",
+  "version": "1.6.24",
   "description": "短信之洪水",
   "main": "src/main.ts",
   "bin": "dist/main.js",
@@ -12,7 +12,10 @@
     "build": "rimraf dist && tsc && pkg -C GZip ."
   },
   "pkg": {
-    "scripts": "dist/api/**/*.js",
+    "scripts": [
+      "dist/api/**/*.js",
+      "node_modules/tesseract.js/src/worker-script/node/index.js"
+    ],
     "assets": "configs/**/*",
     "targets": [
       "latest-win-x64"
