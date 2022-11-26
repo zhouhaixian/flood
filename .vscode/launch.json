@@ -10,7 +10,8 @@
       "name": "Debug",
       "runtimeArgs": ["-r", "ts-node/register"],
       "args": ["${workspaceFolder}/scripts/debug.ts", "${fileBasenameNoExtension}"],
-      "outputCapture": "std"
+      "outputCapture": "std",
+      "env": { "NODE_ENV": "development"}
     }
   ]
 }

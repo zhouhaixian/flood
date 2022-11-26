@@ -8,6 +8,8 @@ export default async function (target: string) {
   );
   const captcha = await core.verify(
     'https://my.cnki.net/Register/CheckCode.aspx',
+    {},
+    0,
   );
 
   const headers = {

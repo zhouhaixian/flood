@@ -5,6 +5,8 @@ export default async function (target: string) {
   const core = new Core();
   const captcha = await core.verify(
     'https://www.teamsbuy.com/api/v1/home/common/getImageCode',
+    {},
+    0,
   );
 
   const data = (await core
