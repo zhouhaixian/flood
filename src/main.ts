@@ -7,6 +7,10 @@ import { API, Blacklist, Targets } from './types';
 import { wait } from './utils/wait';
 
 (async function main() {
+  process.on('unhandledRejection', () => {
+    null;
+  });
+
   log4js.configure({
     appenders: {
       out: { type: 'stdout' },
