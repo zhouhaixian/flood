@@ -7,8 +7,15 @@ import { API, Blacklist, Targets } from './types';
 import { wait } from './utils/wait';
 
 (async function main() {
-  process.on('unhandledRejection', () => {
-    null;
+  const logger = log4js.getLogger('main');
+  process.on('unhandledRejection', async (_, promise) => {
+    promise.catch((reason) =>
+      logger.error(`未捕获的被拒绝的期约: ${reason.stack}`),
+    );
+  });
+
+  process.on('uncaughtException', (error) => {
+    logger.error(`未捕获的异常: ${error}`);
   });
 
   log4js.configure({
