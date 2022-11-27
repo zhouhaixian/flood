@@ -22,7 +22,7 @@ yarn install
 
 ```bash
 yarn new <网址> <API名称>
-# 例如: yarn new http://www.moj.gov.cn/sfbsso/register.html mog.gov.cn
+# 例如: yarn new http://www.moj.gov.cn/sfbsso/register.html www.mog.gov.cn
 ```
 
 新建的文件位于 `src/api` 目录下
