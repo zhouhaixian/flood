@@ -6,8 +6,6 @@ export default async function (target: string) {
   await core.get('https://user.mofcom.gov.cn/registration?siteId=yhdl');
   const captcha = await core.verify(
     'https://user.mofcom.gov.cn/registration/imgCode',
-    {},
-    80,
   );
 
   const data = (await core
