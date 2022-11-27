@@ -63,7 +63,6 @@ export class Core {
   public verify(
     url: string,
     options?: OptionsOfTextResponseBody | undefined,
-    thresholdValue?: number,
   ): Promise<string> {
     return new Promise((resolve) => {
       const timestamp = new Date().getTime().toString();
@@ -91,7 +90,7 @@ export class Core {
       client
         .buffer()
         .then((data) => {
-          return recognize(data, thresholdValue);
+          return recognize(data);
         })
         .then((data) => {
           resolve(data);
