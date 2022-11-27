@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node .",
+    "debug": "ts-node ./scripts/debug",
     "new": "ts-node scripts/new",
     "delete": "ts-node scripts/delete",
     "build": "rimraf dist && tsc && pkg -C GZip ."
