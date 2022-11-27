@@ -20,12 +20,68 @@ yarn install
 
 ### 新增 API
 
-```bash
-yarn new <网址> <API名称>
-# 例如: yarn new http://www.moj.gov.cn/sfbsso/register.html www.mog.gov.cn
+你可以通过 `yarn new <网址> <API名称>` 命令新建 `API模板文件`
+
+该命令还有一个可选参数 `-captcha`, 是否提供该参数取决于是否需要识别验证码, 有无提供该参数将导致生成的文件内容不同
+
+新建的文件将位于 `src/api` 目录下
+
+#### 模板文件内容
+
+无 `-captcha`:
+
+```ts
+// url
+import { Core } from '../core';
+
+export default async function (target: string) {
+  const core = new Core();
+
+  const data = (await core
+    .post('TODO', {
+      TODO,
+    })
+    .json()) as any;
+
+  if (TODO) {
+    return data;
+  } else {
+    throw new core.APIError(TODO, data);
+  }
+}
 ```
 
-新建的文件位于 `src/api` 目录下
+有 `-captcha`:
+
+```ts
+// url
+import { Core } from '../core';
+
+export default async function (target: string) {
+  const core = new Core();
+  const captcha = await core.verify('TODO');
+
+  const data = (await core
+    .post('TODO', {
+      TODO,
+    })
+    .json()) as any;
+
+  if (TODO) {
+    return data;
+  } else if (TODO) {
+    throw new core.CaptchaError(TODO, data);
+  } else {
+    throw new core.APIError(TODO, data);
+  }
+}
+```
+
+下面是一个例子:
+
+```bash
+yarn new https://user.mofcom.gov.cn/registration?siteId=yhdl user.mofcom.gov.cn -captcha
+```
 
 ### 删除 API
 
