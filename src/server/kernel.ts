@@ -31,67 +31,69 @@ import { isMainThread, parentPort } from "worker_threads";
     (async () => {
       for (const task of tasks) {
         let lastLog = await Logger.LogTable.getLatestByPhone(task.phone);
-        while (true) {
-          let count = 0; // 防止因找不到匹配的provider而无限循环
-          for (const provider of Object.values(providers)) {
-            if (lastLog !== null && count < 1024) {
-              if (lastLog.provider === getUrl(provider)) {
-                lastLog = null;
-              }
-              count++;
-              continue;
-            }
-            (async function execute() {
-              try {
-                const result = await provider(task.phone);
-                await Logger.success(
-                  task.phone,
-                  getUrl(provider),
-                  undefined,
-                  JSON.stringify(result, null, 4)
-                );
-              } catch (error: any) {
-                if (error instanceof CaptchaIncorrectError) {
-                  await Logger.fail(
-                    task.phone,
-                    getUrl(provider),
-                    error.message,
-                    error.stack,
-                    JSON.stringify(error.response, null, 4)
-                  );
-                  sleep(5000).then(execute);
-                } else if (error instanceof ProviderError) {
-                  await Logger.fail(
-                    task.phone,
-                    getUrl(provider),
-                    error.message,
-                    error.stack,
-                    JSON.stringify(error.response, null, 4)
-                  );
-                } else if (error instanceof AxiosError) {
-                  await Logger.fail(
-                    task.phone,
-                    getUrl(provider),
-                    error.message,
-                    error.stack,
-                    JSON.stringify(error.response?.data, null, 4)
-                  );
-                } else {
-                  await Logger.fail(
-                    task.phone,
-                    getUrl(provider),
-                    error.message,
-                    error.stack
-                  );
+        new Promise(async () => {
+          while (true) {
+            let count = 0; // 防止因找不到匹配的provider而无限循环
+            for (const provider of Object.values(providers)) {
+              if (lastLog !== null && count < 1024) {
+                if (lastLog.provider === getUrl(provider)) {
+                  lastLog = null;
                 }
+                count++;
+                continue;
               }
-            })();
-            await sleep(task.intervals);
+              (async function execute() {
+                try {
+                  const result = await provider(task.phone);
+                  await Logger.success(
+                    task.phone,
+                    getUrl(provider),
+                    undefined,
+                    JSON.stringify(result, null, 4)
+                  );
+                } catch (error: any) {
+                  if (error instanceof CaptchaIncorrectError) {
+                    await Logger.fail(
+                      task.phone,
+                      getUrl(provider),
+                      error.message,
+                      error.stack,
+                      JSON.stringify(error.response, null, 4)
+                    );
+                    sleep(5000).then(execute);
+                  } else if (error instanceof ProviderError) {
+                    await Logger.fail(
+                      task.phone,
+                      getUrl(provider),
+                      error.message,
+                      error.stack,
+                      JSON.stringify(error.response, null, 4)
+                    );
+                  } else if (error instanceof AxiosError) {
+                    await Logger.fail(
+                      task.phone,
+                      getUrl(provider),
+                      error.message,
+                      error.stack,
+                      JSON.stringify(error.response?.data, null, 4)
+                    );
+                  } else {
+                    await Logger.fail(
+                      task.phone,
+                      getUrl(provider),
+                      error.message,
+                      error.stack
+                    );
+                  }
+                }
+              })();
+              await sleep(task.intervals);
+            }
           }
-        }
+        });
+        await sleep(61000); //TODO: make this configurable
       }
     })();
-    await sleep(61000); //TODO: make this configurable
   } catch (error) {
     await prisma.$disconnect();
     console.error(error);
