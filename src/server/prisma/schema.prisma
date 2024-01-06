@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model logs {
+  id        BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  status    String    @db.VarChar(16)
+  phone     String    @db.VarChar(11)
+  provider  String    @db.Text
+  message   String?   @db.Text
+  stack     String?   @db.Text
+  response  String?   @db.Text
+}
+
+model tasks {
+  phone     String    @id @db.VarChar(11)
+  active    Boolean
+  intervals Int       @db.UnsignedInt
+  note      String?   @db.Text
+  create_at DateTime? @default(now()) @db.Timestamp(0)
+  update_at DateTime? @default(now()) @db.Timestamp(0)
+}
